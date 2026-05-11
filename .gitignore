@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+library/index.npz
+data/*.json
+.vscode/
+.idea/
+*.swp
+.DS_Store
