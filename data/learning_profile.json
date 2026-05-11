@@ -1,0 +1,112 @@
+{
+  "questions_asked": [
+    {
+      "ts": 1778466568,
+      "query": "项目现金流是 -1000, 400, 400, 400, 400,贴现率 8%。求 NPV 和 IRR。",
+      "topics": [
+        "ch1_modeling",
+        "ch2_interest",
+        "ch5_appraisal"
+      ]
+    },
+    {
+      "ts": 1778502799,
+      "query": "什么是利率力(force of interest),它和实际年利率 i 是什么关系?",
+      "topics": [
+        "ch2_interest"
+      ]
+    },
+    {
+      "ts": 1778502955,
+      "query": "一份债券面值 1000、票面 5%、剩余 5 年、YTM = 4%。算它的价格,并解释为什么会溢价。",
+      "topics": [
+        "ch6_bonds"
+      ]
+    },
+    {
+      "ts": 1778503184,
+      "query": "给我讲讲 Macaulay 久期、修正久期与凸度的区别和联系。",
+      "topics": [
+        "ch7_term"
+      ]
+    }
+  ],
+  "wrong_answers": [
+    {
+      "ts": 1778503326,
+      "exercise_id": "Q3-1",
+      "topic": "ch3_annuities",
+      "stem": "在 i=5% 下,期末支付 1 元、期数 10 年的年金现值 a_10 ≈ ?",
+      "your_answer": "B",
+      "correct_answer": "A",
+      "explanation": "a_n = (1-v^n)/i = (1-1.05^-10)/0.05 ≈ 7.7217。"
+    },
+    {
+      "ts": 1778503404,
+      "exercise_id": "Q2-2",
+      "topic": "ch2_interest",
+      "stem": "若年实际利率 i=10%,其对应的利率力 δ = ln(1+i) = ____ (保留 4 位小数)。",
+      "your_answer": "1.09",
+      "correct_answer": "0.0953",
+      "explanation": "δ = ln(1.10) ≈ 0.09531,保留四位为 0.0953。"
+    }
+  ],
+  "exercise_history": [
+    {
+      "ts": 1778503326,
+      "exercise_id": "Q3-1",
+      "topic": "ch3_annuities",
+      "correct": false
+    },
+    {
+      "ts": 1778503329,
+      "exercise_id": "Q3-1",
+      "topic": "ch3_annuities",
+      "correct": true
+    },
+    {
+      "ts": 1778503404,
+      "exercise_id": "Q2-2",
+      "topic": "ch2_interest",
+      "correct": false
+    }
+  ],
+  "topic_stats": {
+    "ch1_modeling": {
+      "asked": 1,
+      "attempted": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "ch2_interest": {
+      "asked": 2,
+      "attempted": 1,
+      "correct": 0,
+      "wrong": 1
+    },
+    "ch5_appraisal": {
+      "asked": 1,
+      "attempted": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "ch6_bonds": {
+      "asked": 1,
+      "attempted": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "ch7_term": {
+      "asked": 1,
+      "attempted": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "ch3_annuities": {
+      "asked": 0,
+      "attempted": 2,
+      "correct": 1,
+      "wrong": 1
+    }
+  }
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "Q2-1",
+    "topic": "ch2_interest",
+    "type": "single_choice",
+    "stem": "某账户年实际利率 i=8%。存入 1000 元,2 年后的累积值是多少?",
+    "options": [
+      "A) 1160",
+      "B) 1166.40",
+      "C) 1180",
+      "D) 1200"
+    ],
+    "answer": "B",
+    "explanation": "复利累积值 = 1000·(1+0.08)^2 = 1000·1.1664 = 1166.40。"
+  },
+  {
+    "id": "Q2-2",
+    "topic": "ch2_interest",
+    "type": "fill_blank",
+    "stem": "若年实际利率 i=10%,其对应的利率力 δ = ln(1+i) = ____ (保留 4 位小数)。",
+    "answer": "0.0953",
+    "explanation": "δ = ln(1.10) ≈ 0.09531,保留四位为 0.0953。"
+  },
+  {
+    "id": "Q2-3",
+    "topic": "ch2_interest",
+    "type": "single_choice",
+    "stem": "名义利率 i^(4)=12%(按季度复利),其等价的实际年利率是多少?",
+    "options": [
+      "A) 12.00%",
+      "B) 12.36%",
+      "C) 12.55%",
+      "D) 12.68%"
+    ],
+    "answer": "C",
+    "explanation": "(1+0.12/4)^4-1 = 1.03^4-1 ≈ 0.12551 ≈ 12.55%。"
+  },
+  {
+    "id": "Q3-1",
+    "topic": "ch3_annuities",
+    "type": "single_choice",
+    "stem": "在 i=5% 下,期末支付 1 元、期数 10 年的年金现值 a_10 ≈ ?",
+    "options": [
+      "A) 7.7217",
+      "B) 8.1109",
+      "C) 6.4632",
+      "D) 9.6361"
+    ],
+    "answer": "A",
+    "explanation": "a_n = (1-v^n)/i = (1-1.05^-10)/0.05 ≈ 7.7217。"
+  },
+  {
+    "id": "Q3-2",
+    "topic": "ch3_annuities",
+    "type": "calculation",
+    "stem": "年实际利率 i=6%,期末年金每年支付 2000 元,共 5 年。求其现值。",
+    "answer": "8424.73",
+    "explanation": "PV = 2000·a_5|6% = 2000·(1-1.06^-5)/0.06 ≈ 2000·4.21236 ≈ 8424.73。"
+  },
+  {
+    "id": "Q4-1",
+    "topic": "ch4_loan",
+    "type": "calculation",
+    "stem": "贷款 100000 元,年利率 i=5%,等额还款 20 年。每年还款额是多少?",
+    "answer": "8024.26",
+    "explanation": "P = 100000/a_20|5% = 100000 / 12.46221 ≈ 8024.26。"
+  },
+  {
+    "id": "Q5-1",
+    "topic": "ch5_appraisal",
+    "type": "single_choice",
+    "stem": "项目现金流 (年 0,1,2): -1000, 600, 600,贴现率 i=10%。NPV 约为?",
+    "options": [
+      "A) -83.47",
+      "B) 41.32",
+      "C) 41.32",
+      "D) 200.00"
+    ],
+    "answer": "B",
+    "explanation": "NPV = -1000 + 600/1.1 + 600/1.21 ≈ -1000 + 545.45 + 495.87 ≈ 41.32。"
+  },
+  {
+    "id": "Q5-2",
+    "topic": "ch5_appraisal",
+    "type": "fill_blank",
+    "stem": "若 NPV(i)=0 时 i=8%,则该项目的内部收益率 IRR = ____。",
+    "answer": "8%",
+    "explanation": "IRR 的定义就是使 NPV=0 的折现率。"
+  },
+  {
+    "id": "Q6-1",
+    "topic": "ch6_bonds",
+    "type": "single_choice",
+    "stem": "票面利率高于到期收益率(YTM)时,债券价格相对于面值会:",
+    "options": [
+      "A) 平价",
+      "B) 折价(<面值)",
+      "C) 溢价(>面值)",
+      "D) 无法判断"
+    ],
+    "answer": "C",
+    "explanation": "票息率 g > YTM y 时,买家愿意支付高于面值的价格,即溢价。"
+  },
+  {
+    "id": "Q7-1",
+    "topic": "ch7_term",
+    "type": "single_choice",
+    "stem": "下列关于 Macaulay 久期 D 与修正久期 D_M 的关系,正确的是:",
+    "options": [
+      "A) D_M = D·(1+y)",
+      "B) D_M = D/(1+y)",
+      "C) D_M = D - 1",
+      "D) D_M = D"
+    ],
+    "answer": "B",
+    "explanation": "修正久期 D_M = D/(1+y),用于近似 ΔP/P ≈ -D_M·Δy。"
+  },
+  {
+    "id": "Q7-2",
+    "topic": "ch7_term",
+    "type": "fill_blank",
+    "stem": "Redington 免疫的三个条件中,要求资产凸度 ____ 负债凸度。(填'大于等于'或'小于')",
+    "answer": "大于等于",
+    "explanation": "Redington 三条件:PV 相等、Duration 相等,且资产凸度 >= 负债凸度。"
+  },
+  {
+    "id": "Q8-1",
+    "topic": "ch8_expectations",
+    "type": "single_choice",
+    "stem": "在理性预期假设下,预期误差应满足:",
+    "options": [
+      "A) 期望非零",
+      "B) 与历史信息相关",
+      "C) 期望为零且与可得信息无关",
+      "D) 服从均匀分布"
+    ],
+    "answer": "C",
+    "explanation": "理性预期要求预期误差具有零均值且不能由可得信息预测,否则就不是无偏预期。"
+  }
+]

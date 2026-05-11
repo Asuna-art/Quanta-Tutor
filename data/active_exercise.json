@@ -1,0 +1,1 @@
+{"id": "Q2-2", "topic": "ch2_interest", "type": "fill_blank", "stem": "若年实际利率 i=10%,其对应的利率力 δ = ln(1+i) = ____ (保留 4 位小数)。", "answer": "0.0953", "explanation": "δ = ln(1.10) ≈ 0.09531,保留四位为 0.0953。"}

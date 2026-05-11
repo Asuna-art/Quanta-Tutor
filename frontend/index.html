@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>金融数学智能学伴 · Quanta Tutor</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- KaTeX for LaTeX rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<!-- Markdown -->
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+
+<!-- ================ 顶部 ================ -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M14 44 Q24 18 32 32 T50 18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="32" cy="32" r="2" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Quanta Tutor</div>
+        <div class="brand-sub">金融数学 · 智能学伴</div>
+      </div>
+    </div>
+
+    <nav class="topnav">
+      <button class="tab active" data-pane="chat">
+        <span class="tab-num">01</span>
+        <span class="tab-label">问答</span>
+      </button>
+      <button class="tab" data-pane="exercise">
+        <span class="tab-num">02</span>
+        <span class="tab-label">练习</span>
+      </button>
+      <button class="tab" data-pane="profile">
+        <span class="tab-num">03</span>
+        <span class="tab-label">学情</span>
+      </button>
+      <button class="tab" data-pane="plan">
+        <span class="tab-num">04</span>
+        <span class="tab-label">规划</span>
+      </button>
+    </nav>
+
+    <div class="meta">
+      <span class="meta-label">VOL.</span>
+      <span class="meta-num">I</span>
+      <span class="meta-sep">·</span>
+      <span class="meta-label">EDITION</span>
+      <span class="meta-num" id="today-num">—</span>
+    </div>
+  </div>
+  <div class="rule"></div>
+</header>
+
+
+<!-- ================ Pane 1: 问答 ================ -->
+<main class="pane active" id="pane-chat">
+  <section class="chat-shell">
+    <aside class="sidebar">
+      <div class="side-intro">
+        <h2 class="side-title">金融数学助教</h2>
+        <p class="side-desc">
+          覆盖利率、年金、贷款、投资评估、债券、期限结构八章。
+          助教会检索讲义、调用计算器,并展示推理过程。
+        </p>
+      </div>
+
+      <div class="quick-prompts">
+        <div class="side-label">推荐问题</div>
+        <button class="qbtn" data-q="什么是利率力(force of interest),它和实际年利率 i 是什么关系?">
+          什么是利率力 δ
+        </button>
+        <button class="qbtn" data-q="贷款 100 万元,年利率 6%,等额还款 20 年,每年还多少?帮我算一下并给出前三期的还款表。">
+          100 万 · 6% · 20 年 等额还款
+        </button>
+        <button class="qbtn" data-q="一份债券面值 1000、票面 5%、剩余 5 年、YTM = 4%。算它的价格,并解释为什么会溢价。">
+          债券为什么会溢价
+        </button>
+        <button class="qbtn" data-q="给我讲讲 Macaulay 久期、修正久期与凸度的区别和联系。">
+          久期 / 修正久期 / 凸度
+        </button>
+        <button class="qbtn" data-q="项目现金流是 -1000, 400, 400, 400, 400,贴现率 8%。求 NPV 和 IRR。">
+          NPV / IRR 计算
+        </button>
+      </div>
+
+      <div class="badges">
+        <span class="badge"><span class="dot"></span>RAG 已加载</span>
+        <span class="badge"><span class="dot"></span>16 个工具就绪</span>
+      </div>
+    </aside>
+
+    <section class="chat-main">
+      <div class="chat-header">
+        <div class="chat-title">
+          <h1>对话</h1>
+          <span class="serial">№ <span id="convo-num">001</span></span>
+        </div>
+        <button id="reset-chat" class="ghost-btn">清空对话</button>
+      </div>
+
+      <div class="chat-scroll" id="chat-scroll">
+        <div class="messages" id="messages">
+          <article class="msg msg-system">
+            <div class="msg-bubble">
+              <div class="msg-meta">系统 · 助教就绪</div>
+              <div class="msg-body">
+                <p>你好。我是你的金融数学助教。我可以:</p>
+                <ul>
+                  <li>用「定义—原理—示例—易错点」的结构回答课程问题;</li>
+                  <li>调用专用计算器精确计算复利、年金、贷款、NPV、IRR、债券价格、久期等;</li>
+                  <li>从课程讲义中检索原文佐证;</li>
+                  <li>根据你的提问与错题,生成针对性的练习与复习计划。</li>
+                </ul>
+                <p class="hint">在下方输入框开始提问吧。</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <form class="composer" id="composer">
+        <div class="composer-inner">
+          <textarea id="input" rows="2"
+            placeholder="比如:解释一下贴现因子 v = 1/(1+i) 的含义,并举例说明..."
+            spellcheck="false"></textarea>
+          <div class="composer-bar">
+            <span class="composer-hint">⌘/Ctrl + Enter 发送</span>
+            <button type="submit" class="send-btn">
+              <span>提问</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </section>
+</main>
+
+
+<!-- ================ Pane 2: 练习 ================ -->
+<main class="pane" id="pane-exercise">
+  <section class="ex-shell">
+    <header class="ex-header">
+      <div class="kicker">个性化练习</div>
+      <h2>对症下药的题目</h2>
+      <p>选择章节与题型,系统将自动推荐你薄弱章节的题目;不指定时,会基于历史学情挑选。</p>
+    </header>
+
+    <div class="ex-controls">
+      <label class="select">
+        <span>章节</span>
+        <select id="ex-topic">
+          <option value="">自动 (推荐薄弱章节)</option>
+        </select>
+      </label>
+      <label class="select">
+        <span>题型</span>
+        <select id="ex-type">
+          <option value="">不限</option>
+          <option value="single_choice">单选题</option>
+          <option value="fill_blank">填空题</option>
+          <option value="calculation">计算题</option>
+        </select>
+      </label>
+      <button id="ex-new" class="primary-btn">
+        <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        生成题目
+      </button>
+    </div>
+
+    <article class="card ex-card" id="ex-card" hidden>
+      <div class="card-corner top-left"></div>
+      <div class="card-corner top-right"></div>
+      <div class="card-corner bottom-left"></div>
+      <div class="card-corner bottom-right"></div>
+      <div class="ex-id" id="ex-id"></div>
+      <div class="ex-topic-tag" id="ex-topic-tag"></div>
+      <div class="ex-stem" id="ex-stem"></div>
+      <ul class="ex-options" id="ex-options"></ul>
+      <div class="ex-answer-row">
+        <input id="ex-answer" placeholder="在此输入你的答案..." spellcheck="false" />
+        <button id="ex-submit" class="primary-btn">提交</button>
+      </div>
+      <div id="ex-result" class="ex-result"></div>
+    </article>
+
+    <article class="placeholder" id="ex-placeholder">
+      <div class="ph-icon">
+        <svg viewBox="0 0 64 64"><path d="M16 12h22l10 10v30H16z" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M22 28h20M22 36h20M22 44h12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </div>
+      <p>点击 <em>生成题目</em>,助教会从题库中为你挑一题。</p>
+    </article>
+  </section>
+</main>
+
+
+<!-- ================ Pane 3: 学情 ================ -->
+<main class="pane" id="pane-profile">
+  <section class="profile-shell">
+    <header class="profile-header">
+      <div class="kicker">学习诊断</div>
+      <h2>你的学习画像</h2>
+      <p>基于你提问的话题分布、练习正确率与近期错题,自动生成的简单画像。</p>
+      <button id="reset-profile" class="ghost-btn danger">清除全部学情数据</button>
+    </header>
+
+    <div class="kpis">
+      <div class="kpi"><div class="kpi-num" id="kpi-q">0</div><div class="kpi-label">累计提问</div></div>
+      <div class="kpi"><div class="kpi-num" id="kpi-ex">0</div><div class="kpi-label">完成练习</div></div>
+      <div class="kpi"><div class="kpi-num" id="kpi-wrong">0</div><div class="kpi-label">错题总数</div></div>
+      <div class="kpi"><div class="kpi-num" id="kpi-acc">—</div><div class="kpi-label">总体正确率</div></div>
+    </div>
+
+    <div class="topic-grid" id="topic-grid">
+      <div class="empty-row">尚无数据 — 先问几个问题或做几道题吧。</div>
+    </div>
+
+    <h3 class="sub-h">最近错题</h3>
+    <div id="recent-wrong" class="wrong-list">
+      <div class="empty-row">暂无错题。</div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ================ Pane 4: 规划 ================ -->
+<main class="pane" id="pane-plan">
+  <section class="plan-shell">
+    <header class="plan-header">
+      <div class="kicker">学习规划</div>
+      <h2>把目标拆解成每天的小步</h2>
+      <p>根据你当前的学情画像和时间预算,自动分配各章节的复习时间和任务。</p>
+    </header>
+
+    <div class="plan-controls">
+      <label class="select">
+        <span>天数</span>
+        <input id="plan-days" type="number" min="1" max="60" value="7" />
+      </label>
+      <label class="select">
+        <span>每日小时</span>
+        <input id="plan-hours" type="number" min="0.5" max="12" step="0.5" value="2" />
+      </label>
+      <label class="select wide">
+        <span>目标</span>
+        <input id="plan-goal" type="text" value="期末考试冲刺" />
+      </label>
+      <button id="plan-go" class="primary-btn">生成计划</button>
+    </div>
+
+    <div id="plan-output" class="plan-output">
+      <div class="placeholder">
+        <div class="ph-icon">
+          <svg viewBox="0 0 64 64"><path d="M14 14h36v36H14z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M14 24h36M24 14v36M34 14v36M44 14v36M14 34h36M14 44h36" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+        </div>
+        <p>设定参数,点击 <em>生成计划</em>。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<!-- ================ 页脚 ================ -->
+<footer class="endpiece">
+  <div class="rule"></div>
+  <div class="endpiece-inner">
+    <span>金融数学 · J2FIN 2024 课程辅助系统</span>
+    <span class="endpiece-mid">· 实验一 Agent · 实验二 RAG · 大作业:智能学伴 ·</span>
+    <span>由 Claude × Qwen 驱动</span>
+  </div>
+</footer>
+
+
+<script src="/static/app.js"></script>
+</body>
+</html>
